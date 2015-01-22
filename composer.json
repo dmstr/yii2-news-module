@@ -1,0 +1,34 @@
+{
+    "name": "dmstr/yii2-news",
+    "description": "yii2 news module with text blocks image and video gallery, with yii2 moximanager",
+    "type": "yii2-module",
+    "keywords": ["yii2","module","news"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "d.letz",
+            "email": "d.letz@herzogkommunikation.de"
+        }
+    ],
+    "repositories":[
+        {
+            "type": "git",
+            "url": "https://git.hrzg.de/hrzg/yii2-moxiemanager-module.git"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "2.0.*",
+        "dmstr/yii2-db": "*",
+        "hrzg/yii2-moxiemanager-module": "dev-master",
+        "dmstr/yii2-migrate-command": "*"
+    },
+    "require-dev": {
+        "schmunk42/yii2-giiant": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "dmstr\\news\\": ""
+        }
+    }
+}
