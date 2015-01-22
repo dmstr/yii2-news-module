@@ -1,13 +1,11 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema p4_dmstr
+-- Schema p4_khf
 -- -----------------------------------------------------
--- Yii 2.0 News Widget
+-- Kohlhammer Feuerwehr Webseite 2015
 
 -- -----------------------------------------------------
 -- Table `dmstr_news`
@@ -20,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_news` (
   `text_html` TEXT NOT NULL,
   `location` VARCHAR(255) NULL,
   `published_at` DATETIME NOT NULL,
-  `image` VARCHAR(255) NOT NULL COMMENT 'from moxiemanager\n',
+  `image` VARCHAR(255) NOT NULL COMMENT 'from moxiemanager',
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
@@ -39,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_image_gallery` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_gallery_photo_news1`
+  CONSTRAINT `fk_gallery_image_news1`
     FOREIGN KEY (`news_id`)
     REFERENCES `dmstr_news` (`id`)
     ON DELETE NO ACTION
@@ -59,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_video_gallery` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_video_news1`
+  CONSTRAINT `fk_gallery_video_news1`
     FOREIGN KEY (`news_id`)
     REFERENCES `dmstr_news` (`id`)
     ON DELETE NO ACTION
@@ -83,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_text_block` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_text_block_news1`
+  CONSTRAINT `fk_block_text_news1`
     FOREIGN KEY (`news_id`)
     REFERENCES `dmstr_news` (`id`)
     ON DELETE NO ACTION
@@ -108,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_image` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_dmstr_image_dmstr_photo_gallery1`
+  CONSTRAINT `fk_image_image_gallery1`
     FOREIGN KEY (`photo_gallery_id`)
     REFERENCES `dmstr_image_gallery` (`id`)
     ON DELETE NO ACTION
@@ -130,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_video` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_dmstr_video_dmstr_video_gallery1`
+  CONSTRAINT `fk_video_video_gallery1`
     FOREIGN KEY (`video_gallery_id`)
     REFERENCES `dmstr_video_gallery` (`id`)
     ON DELETE NO ACTION
