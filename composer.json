@@ -16,7 +16,7 @@
             "url": "https://git.hrzg.de/hrzg/yii2-moxiemanager-module.git"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "yiisoft/yii2": "2.0.*",
         "dmstr/yii2-db": "*",
@@ -24,7 +24,7 @@
         "dmstr/yii2-migrate-command": "*"
     },
     "require-dev": {
-        "schmunk42/yii2-giiant": "dev-master"
+        "schmunk42/yii2-giiant": "*"
     },
     "autoload": {
         "psr-4": {
