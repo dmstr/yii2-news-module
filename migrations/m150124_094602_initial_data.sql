@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `dmstr_news` (
   `location` VARCHAR(255) NULL,
   `published_at` DATETIME NOT NULL,
   `image` VARCHAR(255) NOT NULL COMMENT 'from moxiemanager',
+  `image_source` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))

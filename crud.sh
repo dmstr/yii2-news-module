@@ -1,8 +1,13 @@
-#!/bin/bash
-./yii giiant-batch --interactive=0 --overwrite=1 \
+./yii giiant-batch \
 --tables=dmstr_news,dmstr_text_block,dmstr_image_gallery,dmstr_image,dmstr_video_gallery,dmstr_video \
+--interactive=0 \
+--overwrite=1 \
+--enableI18N=1 \
+--messageCategory=app \
 --tablePrefix=dmstr_ \
+--crudPathPrefix= \
 --modelNamespace=dmstr\\news\\models \
 --crudControllerNamespace=dmstr\\news\\controllers \
+--crudViewPath=@app/vendor/dmstr/yii2-news/views \
 --crudProviders=hrzg\\moxiecode\\moxiemanager\\providers\\Provider,dmstr\\news\\providers\\EditorProvider,dmstr\\news\\providers\\FieldProvider,dmstr\\news\\providers\\DateTimeProvider,dmstr\\news\\providers\\OptsProvider,dmstr\\news\\providers\\RelationProvider \
---modelBaseClass=dmstr\\news\\models\\ActiveRecord
+--modelBaseClass=dmstr\\news\\models\\ActiveRecord \

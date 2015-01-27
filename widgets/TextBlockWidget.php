@@ -10,7 +10,7 @@
 namespace dmstr\news\widgets;
 
 use yii\helpers\Html;
-use yii\jui\Widget;
+use yii\base\Widget;
 use dmstr\news\models\TextBlock;
 
 /**

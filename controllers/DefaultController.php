@@ -1,6 +1,6 @@
 <?php
 
-namespace app\\modules\\news\\controllers;
+namespace dmstr\news\controllers;
 
 use yii\web\Controller;
 
