@@ -4,5 +4,5 @@
 --tablePrefix=dmstr_ \
 --modelNamespace=dmstr\\news\\models \
 --crudControllerNamespace=dmstr\\news\\controllers \
---crudProviders=hrzg\\moxiecode\\moxiemanager\\providers\\Provider,dmstr\\news\\providers\\EditorProvider,dmstr\\news\\providers\\FieldProvider,dmstr\\news\\providers\\DateTimeProvider,dmstr\\news\\providers\\OptsProvider,dmstr\\news\\providers\\RelationProvider \
+--crudProviders=hrzg\\moxiecode\\moxiemanager\\providers\\Provider \
 --modelBaseClass=dmstr\\news\\models\\ActiveRecord

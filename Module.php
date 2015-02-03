@@ -1,6 +1,6 @@
 <?php
 
-namespace dmstr\news;
+namespace dmstr\modules\news;
 
 class Module extends \yii\base\Module
 {

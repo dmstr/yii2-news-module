@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace dmstr\news\models;
+namespace dmstr\modules\news\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
