@@ -1,5 +1,5 @@
 {
-    "name": "dmstr/yii2-news",
+    "name": "dmstr/yii2-news-module",
     "description": "yii2 news module with text blocks image and video gallery, with yii2 moximanager",
     "type": "yii2-module",
     "keywords": ["yii2","module","news"],
