@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
 * @var yii\web\View $this
-* @var dmstr\news\models\News $model
+* @var dmstr\modules\news\models\News $model
 */
 
 $this->title = Yii::t('app', 'Create');

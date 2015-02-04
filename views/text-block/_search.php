@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var dmstr\news\models\search\TextBlockSearch $model
+ * @var dmstr\modules\news\models\search\TextBlock $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>

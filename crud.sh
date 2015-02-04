@@ -9,5 +9,5 @@
 --crudPathPrefix= \
 --messageCategory=app \
 --crudViewPath=@app/vendor/dmstr/yii2-news-module/views \
---crudProviders=hrzg\\moxiecode\\moxiemanager\\providers\\Provider \
+--crudProviders=hrzg\\moxiecode\\moxiemanager\\providers\\Provider,schmunk42\\giiant\\crud\\providers\\CallbackProvider,dmstr\\modules\\news\\providers\\EditorProvider,dmstr\\modules\\news\\providers\\DateTimeProvider \
 --modelBaseClass=dmstr\\modules\\news\\models\\ActiveRecord

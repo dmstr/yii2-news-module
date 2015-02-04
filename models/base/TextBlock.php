@@ -1,6 +1,6 @@
 <?php
 
-namespace dmstr\news\models\base;
+namespace dmstr\modules\news\models\base;
 
 use Yii;
 
@@ -17,9 +17,9 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property \dmstr\news\models\News $news
+ * @property \dmstr\modules\news\models\News $news
  */
-class TextBlock extends \dmstr\news\models\ActiveRecord
+class TextBlock extends \dmstr\modules\news\models\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -67,6 +67,6 @@ class TextBlock extends \dmstr\news\models\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasOne(\dmstr\news\models\News::className(), ['id' => 'news_id']);
+        return $this->hasOne(\dmstr\modules\news\models\News::className(), ['id' => 'news_id']);
     }
 }

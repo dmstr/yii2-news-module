@@ -14,7 +14,12 @@
         "yiisoft/yii2": "2.0.*",
         "dmstr/yii2-db": "*",
         "hrzg/yii2-moxiemanager-module": "dev-master",
-        "dmstr/yii2-migrate-command": "*"
+        "dmstr/yii2-migrate-command": "*",
+        "2amigos/yii2-tinymce-widget": "dev-master",
+        "zhuravljov/yii2-datetime-widgets": "dev-master"
+    },
+    "require-dev": {
+        "schmunk42/yii2-giiant": "dev-master"
     },
     "autoload": {
         "psr-4": {

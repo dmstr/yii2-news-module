@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var dmstr\news\models\TextBlock $model
+ * @var dmstr\modules\news\models\TextBlock $model
  */
 
 $this->title = 'Text Block ' . $model->title . ', ' . Yii::t('app', 'Edit');

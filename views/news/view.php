@@ -9,7 +9,7 @@ use dmstr\bootstrap\Tabs;
 
 /**
 * @var yii\web\View $this
-* @var dmstr\news\models\News $model
+* @var dmstr\modules\news\models\News $model
 */
 
 $this->title = 'News ' . $model->title;
@@ -42,7 +42,7 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
         <?= $model->title ?>    </h3>
 
 
-    <?php $this->beginBlock('dmstr\news\models\News'); ?>
+    <?php $this->beginBlock('dmstr\modules\news\models\News'); ?>
 
     <?= DetailView::widget([
     'model' => $model,
@@ -81,12 +81,12 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
 <p class='pull-right'>
   <?= Html::a(
             '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Image Galleries',
-            ['crud/image-gallery/index'],
+            ['image-gallery/index'],
             ['class'=>'btn text-muted btn-xs']
         ) ?>
   <?= Html::a(
             '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Image Gallery',
-            ['crud/image-gallery/create', 'ImageGallery' => ['news_id' => $model->id]],
+            ['image-gallery/create', 'ImageGallery' => ['news_id' => $model->id]],
             ['class'=>'btn btn-success btn-xs']
         ); ?>
 </p><div class='clearfix'></div>
@@ -95,22 +95,27 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
     'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getImageGalleries(), 'pagination' => ['pageSize' => 10]]),
     'columns' => [			'id',
 			'name',
-			'created_at',
-			'updated_at',
 [
     'class'      => 'yii\grid\ActionColumn',
     'template'   => '{view} {update}',
     'contentOptions' => ['nowrap'=>'nowrap'],
     'urlCreator' => function($action, $model, $key, $index) {
         // using the column name as key, not mapping to 'id' like the standard generator
-        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-        $params[0] = 'crud/image-gallery' . '/' . $action;
-        return \yii\helpers\Url::toRoute($params);
+        $returnUrl = \Yii::$app->request->url;
+        if (strpos($returnUrl, 'returnUrl') !== false) {
+            $returnUrl = urldecode(substr($returnUrl, strpos($returnUrl, 'returnUrl') + 10, strlen($returnUrl)));
+        } else {
+            $returnUrl = (Tabs::getParentRelationRoute(\Yii::$app->controller->id) !== null) ?
+                Tabs::getParentRelationRoute(\Yii::$app->controller->id) : null;
+        }
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key, 'returnUrl' => $returnUrl];
+        $params[0] = 'image-gallery' . '/' . $action;
+        return Url::toRoute($params);
     },
     'buttons'    => [
         
     ],
-    'controller' => 'crud/image-gallery'
+    'controller' => 'image-gallery'
 ],]
 ]);?>
 <?php Pjax::end() ?>
@@ -121,12 +126,12 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
 <p class='pull-right'>
   <?= Html::a(
             '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Text Blocks',
-            ['crud/text-block/index'],
+            ['text-block/index'],
             ['class'=>'btn text-muted btn-xs']
         ) ?>
   <?= Html::a(
             '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Text Block',
-            ['crud/text-block/create', 'TextBlock' => ['news_id' => $model->id]],
+            ['text-block/create', 'TextBlock' => ['news_id' => $model->id]],
             ['class'=>'btn btn-success btn-xs']
         ); ?>
 </p><div class='clearfix'></div>
@@ -135,6 +140,7 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
     'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getTextBlocks(), 'pagination' => ['pageSize' => 10]]),
     'columns' => [			'id',
 			'title',
+			'text_html:ntext',
 			'source',
 [
     'format' => 'html',
@@ -146,22 +152,27 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
 
 ],
 			'published_at',
-			'created_at',
-			'updated_at',
 [
     'class'      => 'yii\grid\ActionColumn',
     'template'   => '{view} {update}',
     'contentOptions' => ['nowrap'=>'nowrap'],
     'urlCreator' => function($action, $model, $key, $index) {
         // using the column name as key, not mapping to 'id' like the standard generator
-        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-        $params[0] = 'crud/text-block' . '/' . $action;
-        return \yii\helpers\Url::toRoute($params);
+        $returnUrl = \Yii::$app->request->url;
+        if (strpos($returnUrl, 'returnUrl') !== false) {
+            $returnUrl = urldecode(substr($returnUrl, strpos($returnUrl, 'returnUrl') + 10, strlen($returnUrl)));
+        } else {
+            $returnUrl = (Tabs::getParentRelationRoute(\Yii::$app->controller->id) !== null) ?
+                Tabs::getParentRelationRoute(\Yii::$app->controller->id) : null;
+        }
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key, 'returnUrl' => $returnUrl];
+        $params[0] = 'text-block' . '/' . $action;
+        return Url::toRoute($params);
     },
     'buttons'    => [
         
     ],
-    'controller' => 'crud/text-block'
+    'controller' => 'text-block'
 ],]
 ]);?>
 <?php Pjax::end() ?>
@@ -172,12 +183,12 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
 <p class='pull-right'>
   <?= Html::a(
             '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app', 'List All') . ' Video Galleries',
-            ['crud/video-gallery/index'],
+            ['video-gallery/index'],
             ['class'=>'btn text-muted btn-xs']
         ) ?>
   <?= Html::a(
             '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'New') . ' Video Gallery',
-            ['crud/video-gallery/create', 'VideoGallery' => ['news_id' => $model->id]],
+            ['video-gallery/create', 'VideoGallery' => ['news_id' => $model->id]],
             ['class'=>'btn btn-success btn-xs']
         ); ?>
 </p><div class='clearfix'></div>
@@ -186,22 +197,27 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
     'dataProvider' => new \yii\data\ActiveDataProvider(['query' => $model->getVideoGalleries(), 'pagination' => ['pageSize' => 10]]),
     'columns' => [			'id',
 			'name',
-			'created_at',
-			'updated_at',
 [
     'class'      => 'yii\grid\ActionColumn',
     'template'   => '{view} {update}',
     'contentOptions' => ['nowrap'=>'nowrap'],
     'urlCreator' => function($action, $model, $key, $index) {
         // using the column name as key, not mapping to 'id' like the standard generator
-        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
-        $params[0] = 'crud/video-gallery' . '/' . $action;
-        return \yii\helpers\Url::toRoute($params);
+        $returnUrl = \Yii::$app->request->url;
+        if (strpos($returnUrl, 'returnUrl') !== false) {
+            $returnUrl = urldecode(substr($returnUrl, strpos($returnUrl, 'returnUrl') + 10, strlen($returnUrl)));
+        } else {
+            $returnUrl = (Tabs::getParentRelationRoute(\Yii::$app->controller->id) !== null) ?
+                Tabs::getParentRelationRoute(\Yii::$app->controller->id) : null;
+        }
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key, 'returnUrl' => $returnUrl];
+        $params[0] = 'video-gallery' . '/' . $action;
+        return Url::toRoute($params);
     },
     'buttons'    => [
         
     ],
-    'controller' => 'crud/video-gallery'
+    'controller' => 'video-gallery'
 ],]
 ]);?>
 <?php Pjax::end() ?>
@@ -214,7 +230,7 @@ $returnUrl                     = (\Yii::$app->request->get('returnUrl') !== null
                      'encodeLabels' => false,
                      'items' => [ [
     'label'   => '<span class="glyphicon glyphicon-asterisk"></span> News',
-    'content' => $this->blocks['dmstr\news\models\News'],
+    'content' => $this->blocks['dmstr\modules\news\models\News'],
     'active'  => true,
 ],[
     'label'   => '<small><span class="glyphicon glyphicon-paperclip"></span> Image Galleries</small>',

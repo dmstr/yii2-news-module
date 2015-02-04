@@ -6,14 +6,26 @@ use \dmstr\bootstrap\Tabs;
 
 /**
 * @var yii\web\View $this
-* @var dmstr\news\models\News $model
+* @var dmstr\modules\news\models\News $model
 * @var yii\widgets\ActiveForm $form
 */
+
+// Cut off returnUrl from request url for only save record option
+$actionUrl = Yii::$app->request->url;
+if (strpos($actionUrl, 'returnUrl') !== false) {
+    $actionUrl = urldecode(substr($actionUrl, 0, strpos($actionUrl, 'returnUrl') - 1));
+}
 ?>
 
 <div class="news-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal', 'enableClientValidation' => false]); ?>
+    <?php $form = ActiveForm::begin([
+                        'id'     => 'News',
+                        'layout' => 'horizontal',
+                        'enableClientValidation' => false,
+                    ]
+                );
+    ?>
 
     <div class="">
         <?php echo $form->errorSummary($model); ?>
@@ -22,8 +34,33 @@ use \dmstr\bootstrap\Tabs;
         <p>
             
 			<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
-			<?= $form->field($model, 'text_html')->textarea(['rows' => 6]) ?>
-			<?= $form->field($model, 'published_at')->textInput() ?>
+			<?= $form->field($model, 'text_html')->widget(
+    \dosamigos\tinymce\TinyMce::className(), [
+    'options' => [
+        'rows' => 15,
+        'paste_remove_styles' => true
+    ],
+    'language' => 'de',
+    'clientOptions' => [
+        'forced_root_block' => 'div',
+        'plugins'           => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks fullscreen",
+            "insertdatetime media table contextmenu paste",
+            "image media preview code"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | pastetext",
+        'menubar' => false
+    ]
+]); ?>
+			<?= $form->field($model, 'published_at')->widget(\zhuravljov\widgets\DateTimePicker::className(), [
+    'options' => ['class' => 'form-control','style' => 'width:145px;'],
+    'clientOptions' => [
+        'autoclose'      => true,
+        'todayHighlight' => true,
+        'format'         => 'yyyy-mm-dd hh:ii'
+    ],
+]); ?>
 			<?= $form->field($model, 'image')->widget('hrzg\moxiecode\moxiemanager\widgets\FilePicker', [
     "model"     => $model,
     // The data model that this widget is associated with
@@ -66,14 +103,33 @@ use \dmstr\bootstrap\Tabs;
         <hr/>
 
         <?= Html::submitButton(
-                        '<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord
-                                    ? Yii::t('app', 'Create') : Yii::t('app', 'Save')),
-                        ['class' => 'btn btn-primary']
+                '<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord
+                            ? Yii::t('app', 'Create') : Yii::t('app', 'Save')),
+                [
+                    'id'    => 'save-' . $model->formName(),
+                    'class' => 'btn btn-success'
+                ]
             );
         ?>
+        <?= (!$model->isNewRecord && \Yii::$app->request->getQueryParam('returnUrl') !== null) ? Html::submitButton(
+                '<span class="glyphicon glyphicon-fast-backward"></span> ' .
+                    Yii::t('app', 'Save and go back') . '',
+                    ['class' => 'btn btn-primary']
+                ) : null;
+        ?>
+
 
         <?php ActiveForm::end(); ?>
 
     </div>
 
 </div>
+
+<?php
+$js = <<<JS
+// get the form id and set the action url
+$('#save-{$model->formName()}').on('click', function(e) {
+    $('form#{$model->formName()}').attr("action","{$actionUrl}");
+});
+JS;
+$this->registerJs($js);

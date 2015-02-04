@@ -1,6 +1,6 @@
 <?php
 
-namespace dmstr\news\models\base;
+namespace dmstr\modules\news\models\base;
 
 use Yii;
 
@@ -18,9 +18,9 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property \dmstr\news\models\ImageGallery $photoGallery
+ * @property \dmstr\modules\news\models\ImageGallery $photoGallery
  */
-class Image extends \dmstr\news\models\ActiveRecord
+class Image extends \dmstr\modules\news\models\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -69,6 +69,6 @@ class Image extends \dmstr\news\models\ActiveRecord
      */
     public function getPhotoGallery()
     {
-        return $this->hasOne(\dmstr\news\models\ImageGallery::className(), ['id' => 'photo_gallery_id']);
+        return $this->hasOne(\dmstr\modules\news\models\ImageGallery::className(), ['id' => 'photo_gallery_id']);
     }
 }

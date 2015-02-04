@@ -1,6 +1,6 @@
 <?php
 
-namespace dmstr\news\models\base;
+namespace dmstr\modules\news\models\base;
 
 use Yii;
 
@@ -17,11 +17,11 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property \dmstr\news\models\ImageGallery[] $imageGalleries
- * @property \dmstr\news\models\TextBlock[] $textBlocks
- * @property \dmstr\news\models\VideoGallery[] $videoGalleries
+ * @property \dmstr\modules\news\models\ImageGallery[] $imageGalleries
+ * @property \dmstr\modules\news\models\TextBlock[] $textBlocks
+ * @property \dmstr\modules\news\models\VideoGallery[] $videoGalleries
  */
-class News extends \dmstr\news\models\ActiveRecord
+class News extends \dmstr\modules\news\models\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -67,7 +67,7 @@ class News extends \dmstr\news\models\ActiveRecord
      */
     public function getImageGalleries()
     {
-        return $this->hasMany(\dmstr\news\models\ImageGallery::className(), ['news_id' => 'id']);
+        return $this->hasMany(\dmstr\modules\news\models\ImageGallery::className(), ['news_id' => 'id']);
     }
 
     /**
@@ -75,7 +75,7 @@ class News extends \dmstr\news\models\ActiveRecord
      */
     public function getTextBlocks()
     {
-        return $this->hasMany(\dmstr\news\models\TextBlock::className(), ['news_id' => 'id']);
+        return $this->hasMany(\dmstr\modules\news\models\TextBlock::className(), ['news_id' => 'id']);
     }
 
     /**
@@ -83,6 +83,6 @@ class News extends \dmstr\news\models\ActiveRecord
      */
     public function getVideoGalleries()
     {
-        return $this->hasMany(\dmstr\news\models\VideoGallery::className(), ['news_id' => 'id']);
+        return $this->hasMany(\dmstr\modules\news\models\VideoGallery::className(), ['news_id' => 'id']);
     }
 }

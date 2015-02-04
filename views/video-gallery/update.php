@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var dmstr\news\models\VideoGallery $model
+ * @var dmstr\modules\news\models\VideoGallery $model
  */
 
 $this->title = 'Video Gallery ' . $model->name . ', ' . Yii::t('app', 'Edit');

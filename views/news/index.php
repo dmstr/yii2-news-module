@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /**
 * @var yii\web\View $this
 * @var yii\data\ActiveDataProvider $dataProvider
-* @var dmstr\news\models\search\NewsSearch $searchModel
+* @var dmstr\modules\news\models\search\News $searchModel
 */
 
     $this->title = 'News';
@@ -43,19 +43,19 @@ $this->params['breadcrumbs'][] = $this->title;
     [
         'label' => '<i class="glyphicon glyphicon-arrow-right"> Image Gallery</i>',
         'url' => [
-            'crud/image-gallery/index',
+            'image-gallery/index',
         ],
     ],
     [
         'label' => '<i class="glyphicon glyphicon-arrow-right"> Text Block</i>',
         'url' => [
-            'crud/text-block/index',
+            'text-block/index',
         ],
     ],
     [
         'label' => '<i class="glyphicon glyphicon-arrow-right"> Video Gallery</i>',
         'url' => [
-            'crud/video-gallery/index',
+            'video-gallery/index',
         ],
     ],
 ]                    ],
@@ -71,6 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
 			'id',
 			'title',
+			'text_html:ntext',
 			'location',
 			'published_at',
 			[
@@ -83,11 +84,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ],
 			'image_source',
-			'created_at',
-			/*'updated_at'*/
             [
                 'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                     'view' => function ($url, $model, $key) {
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                'title' => Yii::t('app', 'View'),
+                                'data-pjax' => '0',
+                                'onClick' => 'setRouteCookie("' . $url . '", "' . \Yii::$app->controller->id . '")'
+                            ]);
+                     }
+                 ],
                 'urlCreator' => function($action, $model, $key, $index) {
+
                     // using the column name as key, not mapping to 'id' like the standard generator
                     $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
                     $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;

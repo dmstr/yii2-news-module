@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace dmstr\news\widgets;
+namespace dmstr\modules\news\widgets;
 
 use yii\helpers\Url;
 use yii\base\Widget;

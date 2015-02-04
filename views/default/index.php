@@ -1,7 +1,7 @@
 <div class="news-default-index">
-    <?= dmstr\news\widgets\DashboardWidget::widget(
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
         [
-            'box_info'  => dmstr\news\models\News::find()->count(),
+            'box_info'  => dmstr\modules\news\models\News::find()->count(),
             'box_title' => 'News',
             'box_style' => 'light-blue-gradient',
             'bg_icon'   => 'ion-android-drawer',
@@ -13,9 +13,9 @@
         ]
     );
     ?>
-    <?= dmstr\news\widgets\DashboardWidget::widget(
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
         [
-            'box_info'  => dmstr\news\models\TextBlock::find()->count(),
+            'box_info'  => dmstr\modules\news\models\TextBlock::find()->count(),
             'box_title' => 'TextBlock',
             'box_style' => 'light-blue-gradient',
             'bg_icon'   => 'ion-android-drawer',
@@ -27,9 +27,9 @@
         ]
     );
     ?>
-    <?= dmstr\news\widgets\DashboardWidget::widget(
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
         [
-            'box_info'  => dmstr\news\models\VideoGallery::find()->count(),
+            'box_info'  => dmstr\modules\news\models\VideoGallery::find()->count(),
             'box_title' => 'VideoGallery',
             'box_style' => 'light-blue-gradient',
             'bg_icon'   => 'ion-android-drawer',
@@ -41,9 +41,9 @@
         ]
     );
     ?>
-    <?= dmstr\news\widgets\DashboardWidget::widget(
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
         [
-            'box_info'  => dmstr\news\models\ImageGallery::find()->count(),
+            'box_info'  => dmstr\modules\news\models\ImageGallery::find()->count(),
             'box_title' => 'ImageGallery',
             'box_style' => 'light-blue-gradient',
             'bg_icon'   => 'ion-android-drawer',
@@ -55,4 +55,4 @@
         ]
     );
     ?>
-    </div>
+</div>

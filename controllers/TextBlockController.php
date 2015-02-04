@@ -1,9 +1,9 @@
 <?php
 
-namespace dmstr\news\controllers;
+namespace dmstr\modules\news\controllers;
 
-use dmstr\news\models\TextBlock;
-use dmstr\news\models\search\TextBlockSearch;
+use dmstr\modules\news\models\TextBlock;
+use dmstr\modules\news\models\search\TextBlock as TextBlockSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
@@ -17,11 +17,37 @@ use dmstr\bootstrap\Tabs;
 class TextBlockController extends Controller
 {
     /**
+     * @var boolean whether to enable CSRF validation for the actions in this controller.
+     * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
+     */
+    public $enableCsrfValidation = false;
+
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'rules' => [
+					[
+						'allow' 	=> true,
+						'actions'   => ['index', 'view', 'create', 'update', 'delete'],
+						'roles'     => ['@']
+					]
+				]
+			]
+		];
+	}
+
+    /**
      * @inheritdoc
      */
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
+            Tabs::registerAssets();
             return true;
         } else {
             return false;
@@ -34,8 +60,9 @@ class TextBlockController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new TextBlockSearch;
+		$searchModel  = new TextBlockSearch;
 		$dataProvider = $searchModel->search($_GET);
+
         Url::remember();
 
         // clear all parent route information in cookies
@@ -56,13 +83,16 @@ class TextBlockController extends Controller
 	 */
 	public function actionView($id, $returnUrl = null)
 	{
-        Tabs::setParentRelationRoute(\Yii::$app->request->url, $this->id);
+        Tabs::rememberActiveTab(\Yii::$app->request->url, $this->id);
 
-        if ($returnUrl !== null) {
-            Url::remember($returnUrl);
-        } else {
-            Url::remember(\Yii::$app->urlManager->createUrl([\Yii::$app->request->pathInfo, 'id' => $id]));
+        if ($returnUrl === null) {
+			$returnUrl = ($this->module->id)
+				? $this->module->id . '/' . $this->id . '/' . $this->action->id
+				: $this->id . '/' . $this->action->id;
+            $returnUrl = \Yii::$app->urlManager->createUrl([$returnUrl, 'id' => $id]);
         }
+        Url::remember($returnUrl);
+
         return $this->render('view', [
 			'model' => $this->findModel($id),
 		]);
@@ -87,28 +117,30 @@ class TextBlockController extends Controller
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             $model->addError('_exception', $msg);
 		}
-        return $this->render('create', ['model' => $model,]);
+        return $this->render('create', ['model' => $model]);
 	}
 
 	/**
 	 * Updates an existing TextBlock model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
+	 * @param null $returnUrl
 	 * @return mixed
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id, $returnUrl = null)
 	{
 		$model = $this->findModel($id);
 
-        if (\Yii::$app->request->get('returnUrl') === null)
+        if ($returnUrl === null)
         {
             $returnUrl = ($this->module->id)
                 ? $this->module->id . '/' . $this->id . '/view'
                 : $this->id . '/view';
-            Url::remember(\Yii::$app->urlManager->createUrl([$returnUrl, 'id' => $id]));
+			$returnUrl = \Yii::$app->urlManager->createUrl([$returnUrl, 'id' => $id]);
         }
+
 		if ($model->load($_POST) && $model->save()) {
-            return $this->redirect(Url::previous());
+            return $this->redirect($returnUrl);
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -120,24 +152,19 @@ class TextBlockController extends Controller
 	 * Deletes an existing TextBlock model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
+     * @param null $returnUrl
 	 * @return mixed
 	 */
-	public function actionDelete($id)
+	public function actionDelete($id, $returnUrl = null)
 	{
         try {
             $this->findModel($id)->delete();
         } catch (\Exception $e) {
             $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
             \Yii::$app->getSession()->setFlash('error', $msg);
-
-            $returnUrl = ($this->module->id)
-                ? $this->module->id . '/' . $this->id . '/view'
-                : $this->id . '/view';
-            return $this->redirect(
-               \Yii::$app->urlManager->createUrl([$returnUrl, 'id' => $id])
-            );
+            return $this->redirect(Url::previous());
         }
-        if (\Yii::$app->request->get('returnUrl') === null)
+        if ($returnUrl === null)
         {
             $returnUrl = ($this->module->id) ? $this->module->id . '/' . $this->id : $this->id;
             return $this->redirect(\Yii::$app->urlManager->createUrl($returnUrl));
