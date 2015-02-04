@@ -1,10 +1,10 @@
 Yii2 News Modul
 ==================
 
-###Dev-config
+### Dev-config
 put this into your app/config/bootstrap.php
 
-```
+    ```
     \Yii::$container->set(
         'schmunk42\giiant\crud\providers\CallbackProvider',
         [
@@ -30,4 +30,15 @@ put this into your app/config/bootstrap.php
             ]
         ]
     );
-```
+    ```
+put this into your app/config/main.php
+
+
+    ```
+    'modules'    => [
+        'news'  => [
+            'class'  => \dmstr\modules\news\Module::className(),
+            'layout' => '@admin-views/layouts/main',
+        ],
+    ]
+    ```
