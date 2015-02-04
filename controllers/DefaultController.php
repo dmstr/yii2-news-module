@@ -1,5 +1,4 @@
 <?php
-
 namespace app\modules\news\controllers;
 
 use yii\web\Controller;
