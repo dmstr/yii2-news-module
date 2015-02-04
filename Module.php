@@ -4,7 +4,7 @@ namespace dmstr\modules\news;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'dmstr\\news\\controllers';
+    public $controllerNamespace = 'dmstr\\modules\\news\\controllers';
 
     public function init()
     {
