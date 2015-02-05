@@ -1,24 +1,33 @@
 {
-    "name": "dmstr/yii2-news-module",
-    "description": "yii2 news module with text blocks image and video gallery, with yii2 moximanager",
-    "type": "yii2-module",
-    "keywords": ["yii2","module","news"],
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "d.letz",
-            "email": "d.letz@herzogkommunikation.de"
-        }
-    ],
-    "require": {
-        "yiisoft/yii2": "2.0.*",
-        "dmstr/yii2-db": "*",
-        "hrzg/yii2-moxiemanager-module": "dev-master",
-        "dmstr/yii2-migrate-command": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "dmstr\\module\\news\\": ""
-        }
+  "name": "dmstr/yii2-news-module",
+  "description": "yii2 news module with text blocks image and video gallery, with yii2 moximanager",
+  "type": "yii2-module",
+  "keywords": [
+    "yii2",
+    "module",
+    "news"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "d.letz",
+      "email": "d.letz@herzogkommunikation.de"
     }
+  ],
+  "require": {
+    "yiisoft/yii2": "2.0.*",
+    "dmstr/yii2-db": "*",
+    "hrzg/yii2-moxiemanager-module": "*",
+    "dmstr/yii2-migrate-command": "*",
+    "2amigos/yii2-ckeditor-widget": "*",
+    "zhuravljov/yii2-datetime-widgets": "1.*"
+  },
+  "require-dev": {
+    "schmunk42/yii2-giiant": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "dmstr\\modules\\news\\": ""
+    }
+  }
 }
