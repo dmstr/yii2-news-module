@@ -12,9 +12,9 @@ namespace dmstr\modules\news\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
-use \dmstr\news\widgets\TextBlockWidget;
-use \dmstr\news\widgets\ImageGalleryWidget;
-use \dmstr\news\widgets\VideoGalleryWidget;
+use \dmstr\modules\news\widgets\TextBlockWidget;
+use \dmstr\modules\news\widgets\ImageGalleryWidget;
+use \dmstr\modules\news\widgets\VideoGalleryWidget;
 
 
 

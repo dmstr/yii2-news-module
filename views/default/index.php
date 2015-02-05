@@ -1,12 +1,58 @@
 <div class="news-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
+        [
+            'box_info'  => dmstr\modules\news\models\News::find()->count(),
+            'box_title' => 'News',
+            'box_style' => 'light-blue-gradient',
+            'bg_icon'   => 'ion-android-drawer',
+            'link_text' => 'Verwalten',
+            'rel_url'   => '../news/news',
+            'col_xs'   => '12',
+            'col_md'   => '6',
+            'col_lg'   => '4',
+        ]
+    );
+    ?>
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
+        [
+            'box_info'  => dmstr\modules\news\models\TextBlock::find()->count(),
+            'box_title' => 'TextBlock',
+            'box_style' => 'light-blue-gradient',
+            'bg_icon'   => 'ion-android-drawer',
+            'link_text' => 'Verwalten',
+            'rel_url'   => '../news/text-block',
+            'col_xs'   => '12',
+            'col_md'   => '6',
+            'col_lg'   => '4',
+        ]
+    );
+    ?>
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
+        [
+            'box_info'  => dmstr\modules\news\models\VideoGallery::find()->count(),
+            'box_title' => 'VideoGallery',
+            'box_style' => 'light-blue-gradient',
+            'bg_icon'   => 'ion-android-drawer',
+            'link_text' => 'Verwalten',
+            'rel_url'   => '../news/video-gallery',
+            'col_xs'   => '12',
+            'col_md'   => '6',
+            'col_lg'   => '4',
+        ]
+    );
+    ?>
+    <?= dmstr\modules\news\widgets\DashboardWidget::widget(
+        [
+            'box_info'  => dmstr\modules\news\models\ImageGallery::find()->count(),
+            'box_title' => 'ImageGallery',
+            'box_style' => 'light-blue-gradient',
+            'bg_icon'   => 'ion-android-drawer',
+            'link_text' => 'Verwalten',
+            'rel_url'   => '../news/image-gallery',
+            'col_xs'   => '12',
+            'col_md'   => '6',
+            'col_lg'   => '4',
+        ]
+    );
+    ?>
 </div>
