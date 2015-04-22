@@ -28,5 +28,5 @@
     "psr-4": {
       "dmstr\\modules\\news\\": ""
     }
-  },
+  }
 }
